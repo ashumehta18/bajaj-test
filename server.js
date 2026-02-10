@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 2. Serve static files from the 'public' folder
+// Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 const PORT = process.env.PORT || 3000;
@@ -82,7 +82,7 @@ app.post('/bfhl', async (req, res) => {
             case 'AI':
                 if (typeof value !== 'string' || value.trim() === "") throw new Error("AI query must be a string");
                 try {
-                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
                     const prompt = `${value}. Respond with strictly only one word. No punctuation.`;
                     const result = await model.generateContent(prompt);
                     resultData = result.response.text().trim().split(/\s+/)[0].replace(/[^\w]/g, '');
